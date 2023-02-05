@@ -15,13 +15,13 @@ export default function Pagination({
   currentPage,
   onPageChange,
 }: PaginationType) {
+  const [pageNo, setPageNo] = useState("");
   const pagesCount = Math.ceil(items / pageSize);
   if (pagesCount === 1 || pagesCount === 0) return null;
   const LBound = Math.min(Math.max(1, currentPage - 2), pagesCount - 4);
   const RBound = Math.max(Math.min(pagesCount, currentPage + 2), 5);
   const pages = range(LBound, RBound);
 
-  const [pageNo, setPageNo] = useState("");
   const onSubmitFn = (e: FormEvent<HTMLInputElement>) => {
     e.preventDefault();
     const number = parseInt(pageNo);
