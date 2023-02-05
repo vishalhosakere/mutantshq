@@ -1,7 +1,7 @@
-export default function Home() {
+export default function Dashboard() {
   return (
     <div className="w-full h-screen flex justify-center items-center">
-      Home Page
+      Dashboard
     </div>
   );
 }
