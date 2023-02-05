@@ -9,7 +9,7 @@ interface PaginationType {
   onPageChange: (page: number) => void;
 }
 
-export default function ({
+export default function Pagination({
   items,
   pageSize,
   currentPage,

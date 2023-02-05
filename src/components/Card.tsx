@@ -21,6 +21,7 @@ function Card({ token_id, image_uri, owner_address }: NftInfoType) {
         <a
           href={`https://looksrare.org/collections/0x60E4d786628Fea6478F785A6d7e704777c86a7c6/${token_id}`}
           target="_blank"
+          rel="noreferrer"
           className="relative aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-xl"
         >
           <img
@@ -35,6 +36,7 @@ function Card({ token_id, image_uri, owner_address }: NftInfoType) {
             <a
               href={`https://etherscan.io/address/${owner_address}`}
               target="_blank"
+              rel="noreferrer"
               className="font-bold text-sm hover:underline"
             >
               {`${owner_address.slice(0, 5)}...${owner_address.slice(-4, -1)}`}
