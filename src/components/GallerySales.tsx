@@ -37,7 +37,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [onSale, setOnSale] = useState(false);
   const [stakedApe, setStakedApe] = useState(false);
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [minEth, setMinEth] = useState("");
   const [maxEth, setMaxEth] = useState("");
   const pageSize = 24;
