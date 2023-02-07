@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Card, { NftInfoType } from "./Card";
-import InputNumber from "./InputNumber";
+import InputNumber from "./InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 
@@ -28,8 +28,6 @@ const item = {
   show: { scale: 1 },
   exit: { x: 100 },
 };
-
-const MotionCard = motion(Card);
 
 export default function GalleryTags({ allData }: { allData: NftInfoType[] }) {
   const [currentPage, setCurrentPage] = useState(1);

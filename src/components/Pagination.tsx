@@ -1,6 +1,6 @@
 import { classNames, range } from "@/utils/Utils";
 import { FormEvent, useState } from "react";
-import InputNumber from "./InputNumber";
+import InputNumberSubmit from "./InputNumberSubmit";
 
 interface PaginationType {
   items: number;
@@ -18,8 +18,12 @@ export default function Pagination({
   const [pageNo, setPageNo] = useState("");
   const pagesCount = Math.ceil(items / pageSize);
   if (pagesCount === 1 || pagesCount === 0) return null;
-  const LBound = Math.min(Math.max(1, currentPage - 2), pagesCount - 4);
-  const RBound = Math.max(Math.min(pagesCount, currentPage + 2), 5);
+  const LBound =
+    pagesCount > 5 ? Math.min(Math.max(1, currentPage - 2), pagesCount - 4) : 1;
+  const RBound =
+    pagesCount > 5
+      ? Math.max(Math.min(pagesCount, currentPage + 2), 5)
+      : pagesCount;
   const pages = range(LBound, RBound);
 
   const onSubmitFn = (e: FormEvent<HTMLInputElement>) => {
@@ -79,13 +83,13 @@ export default function Pagination({
         </ul>
       </nav>
       <form className="flex gap-2">
-        <InputNumber
+        <InputNumberSubmit
           placeholder="Page #"
           onChangeFn={setPageNo}
           onSubmitFn={onSubmitFn}
         />
         <input
-          className="block rounded-lg cursor-pointer  border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
+          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
           type="submit"
           onClick={onSubmitFn}
         />

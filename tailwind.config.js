@@ -10,6 +10,9 @@ module.exports = {
       scale: {
         102: "1.02",
       },
+      fontFamily: {
+        inter: ["Inter", "sans-serif"],
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

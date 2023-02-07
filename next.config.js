@@ -3,6 +3,18 @@ const nextConfig = {
   experimental: {
     appDir: true,
   },
-}
 
-module.exports = nextConfig
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "nft-cdn.alchemy.com",
+        port: "",
+        pathname: "/**",
+      },
+    ],
+    unoptimized: true,
+  },
+};
+
+module.exports = nextConfig;

@@ -7,10 +7,10 @@ import Link from "next/link";
 import NavAsideButton from "./NavAsideButton";
 
 const navigation = [
-  { name: "Dashboard", href: "/dashboard", current: true },
-  { name: "Owners", href: "/owners", current: false },
-  { name: "Unclamied Ape", href: "/unclaimed_ape", current: false },
-  { name: "No Transfers", href: "/no_transfers", current: false },
+  { name: "DASHBOARD", href: "/dashboard", current: true },
+  { name: "ALL MAYC", href: "/all_mayc", current: false },
+  { name: "UNCLAIMED APE", href: "/unclaimed_ape", current: false },
+  { name: "NO TRANSFERS", href: "/no_transfers", current: false },
 ];
 
 export default function NavBar() {
@@ -44,7 +44,7 @@ export default function NavBar() {
                   </Link>
                 </div>
                 <div className="hidden md:ml-6 md:block">
-                  <div className="flex space-x-4">
+                  <div className="flex space-x-4 pt-0.5">
                     {navigation.map((item, idx) => (
                       <NavButton key={idx} name={item.name} href={item.href} />
                     ))}
