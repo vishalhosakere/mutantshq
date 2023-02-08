@@ -4,10 +4,11 @@ import CardSale, { NftSaleType } from "./CardSale";
 import InputNumber from "./InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
-import { Dialog, Switch } from "@headlessui/react";
+import { Dialog } from "@headlessui/react";
 import FilterRowSwitch from "./FilterRowSwitch";
 import FilterRowNumber from "./FilterRowNumber";
 import { classNames } from "@/utils/Utils";
+import SortList from "./SortList";
 
 const paginate = (
   items: NftSaleType[],
@@ -33,6 +34,48 @@ const item = {
   exit: { x: 100 },
 };
 
+const sortItems = [
+  "Token ID: Low to High",
+  "Token ID: High to Low",
+  "Price: Low to High",
+  "Price: High to Low",
+  "Staked: Low to High",
+  "Staked: High to Low",
+];
+
+const sortItemsFunctions = [
+  function tokenLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data.sort((a, b) => {
+      return parseInt(a.token_id, 16) - parseInt(b.token_id, 16);
+    });
+  },
+  function tokenHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data.sort((a, b) => {
+      return parseInt(b.token_id, 16) - parseInt(a.token_id, 16);
+    });
+  },
+  function priceLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data.sort((a, b) => {
+      if (a.price === "0") {
+        return 1;
+      } else if (b.price === "0") {
+        return -1;
+      } else {
+        return parseFloat(a.price) - parseFloat(b.price);
+      }
+    });
+  },
+  function priceHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  },
+  function stakedLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data;
+  },
+  function stakedHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
+    return data;
+  },
+];
+
 export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [onSale, setOnSale] = useState(false);
@@ -40,7 +83,11 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [minEth, setMinEth] = useState("");
   const [maxEth, setMaxEth] = useState("");
-  const pageSize = 24;
+  const [minStaked, setMinStaked] = useState("");
+  const [maxStaked, setMaxStaked] = useState("");
+  const [selectedSortItem, setSelectedSortItem] = useState(sortItems[0]);
+
+  const pageSize = 60;
   const onPageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -76,7 +123,28 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
         })
       : data;
 
-  console.log(data.length);
+  // Filter Min Eth
+  data =
+    minStaked !== ""
+      ? data.filter((el) => {
+          if (el.price === "0") return false;
+          return parseFloat(el.price) > parseFloat(minStaked);
+        })
+      : data;
+
+  // Filter Max Eth
+  data =
+    maxStaked !== ""
+      ? data.filter((el) => {
+          if (el.price === "0") return false;
+          return parseFloat(el.price) < parseFloat(maxStaked);
+        })
+      : data;
+
+  sortItems.map((sortOption, idx) => {
+    if (sortOption !== selectedSortItem) return;
+    data = sortItemsFunctions[idx](sortOption, data);
+  });
 
   const nftInfo = paginate(data, currentPage, pageSize);
 
@@ -95,13 +163,23 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
     setCurrentPage(1);
   };
 
-  const minChanged = (str: string) => {
+  const minEthChanged = (str: string) => {
     setMinEth(str);
     setCurrentPage(1);
   };
 
-  const maxChanged = (str: string) => {
+  const maxEthChanged = (str: string) => {
     setMaxEth(str);
+    setCurrentPage(1);
+  };
+
+  const minStakedChanged = (str: string) => {
+    setMinStaked(str);
+    setCurrentPage(1);
+  };
+
+  const maxStakedChanged = (str: string) => {
+    setMaxStaked(str);
     setCurrentPage(1);
   };
   return (
@@ -145,14 +223,20 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
               setState={setStakedApe}
             />
             <FilterRowNumber
-              label="Min"
-              placeholder="0.00"
-              onChangeFn={minChanged}
+              label="Price Range"
+              minChanged={minEthChanged}
+              maxChanged={maxEthChanged}
             />
             <FilterRowNumber
-              label="Max"
-              placeholder="0.00"
-              onChangeFn={maxChanged}
+              label="Staked $APE Range"
+              minChanged={minStakedChanged}
+              maxChanged={maxStakedChanged}
+            />
+            <SortList
+              label="Sort Results"
+              listItems={sortItems}
+              selectedItem={selectedSortItem}
+              setSelectedItem={setSelectedSortItem}
             />
           </div>
           <Dialog
@@ -177,16 +261,21 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
                   setState={setStakedApe}
                 />
                 <FilterRowNumber
-                  label="Min"
-                  placeholder="0.00"
-                  onChangeFn={minChanged}
+                  label="Price Range"
+                  minChanged={minEthChanged}
+                  maxChanged={maxEthChanged}
                 />
                 <FilterRowNumber
-                  label="Max"
-                  placeholder="0.00"
-                  onChangeFn={maxChanged}
+                  label="Staked $APE Range"
+                  minChanged={minStakedChanged}
+                  maxChanged={maxStakedChanged}
                 />
-
+                <SortList
+                  label="Sort Results"
+                  listItems={sortItems}
+                  selectedItem={selectedSortItem}
+                  setSelectedItem={setSelectedSortItem}
+                />
                 <button
                   className="block mt-6 rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
                   onClick={() => setIsOpen(false)}
@@ -201,7 +290,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 lg:gap-x-8 flex-1"
+            className="grid grid-cols-1 gap-y-10 gap-x-6 mx-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 2xl:px-20 lg:gap-x-8 flex-1"
           >
             {nftInfo.map((nftItem, idx) => (
               <motion.div
@@ -210,7 +299,6 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
                 key={nftItem.token_id + idx}
               >
                 <CardSale
-                  key={nftItem.token_id}
                   image_uri={nftItem.image_uri}
                   token_id={nftItem.token_id}
                   owner_address={nftItem.owner_address}

@@ -25,8 +25,8 @@ function CardSale({ token_id, image_uri, owner_address, price }: NftSaleType) {
       >
         <LooksrareImageLink image_uri={image_uri} token_id={token_id} />
         {price !== "0" && (
-          <div className="w-10 h-10 absolute m-5 pointer-events-none">
-            <Image src="/looksrare-logo.svg" fill={true} alt="Looksrare Logo" />
+          <div className="w-8 h-8 absolute m-5 pointer-events-none">
+            <Image src="/looksrare-logo.png" fill={true} alt="Looksrare Logo" />
           </div>
         )}
         <div className="flex flex-col pb-4 pt-2 px-3 divide-y text-center">
