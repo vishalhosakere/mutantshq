@@ -32,8 +32,8 @@ function CardSale({ token_id, image_uri, owner_address, price }: NftSaleType) {
         <div className="flex justify-center w-full pb-2">MAYC #{token_id}</div>
         <div className="flex justify-between px-2 pb-2">
           {["/diamond.png", "/diamond.png", "/diamond.png", "/diamond.png"].map(
-            (logo) => (
-              <div className="w-8 h-8 cursor-pointer relative">
+            (logo, idx) => (
+              <div className="w-8 h-8 cursor-pointer relative" key={idx}>
                 <Image src={logo} fill={true} alt="Looksrare Logo" />
               </div>
             )
@@ -91,8 +91,11 @@ function CardSale({ token_id, image_uri, owner_address, price }: NftSaleType) {
                 "/blur-logo.png",
                 "/x2y2-logo.png",
                 "/etherscan-logo.png",
-              ].map((logo) => (
-                <div className="w-8 h-8 cursor-pointer relative grayscale hover:grayscale-0">
+              ].map((logo, idx) => (
+                <div
+                  className="w-8 h-8 cursor-pointer relative grayscale hover:grayscale-0"
+                  key={idx}
+                >
                   <Image src={logo} fill={true} alt="Looksrare Logo" />
                 </div>
               ))}
