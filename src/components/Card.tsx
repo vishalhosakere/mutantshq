@@ -19,7 +19,7 @@ function Card({ token_id, image_uri, owner_address }: NftInfoType) {
         //     ? "shadow-amber-600 shadow-xl hover:shadow-amber-600"
         //     : ""
         // } group flex flex-col bg-gray-800 dark:bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-gray-900 dark:hover:bg-neutral-900 duration-200 ease-in-out`}
-        className="group flex flex-col bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-neutral-900 duration-200 ease-in-out"
+        className="group w-60 h-80 flex flex-col bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-neutral-900 duration-200 ease-in-out"
       >
         <LooksrareImageLink image_uri={image_uri} token_id={token_id} />
         <div className="flex flex-col pb-4 pt-2 px-3 divide-y text-center">

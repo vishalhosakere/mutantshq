@@ -21,7 +21,7 @@ function CardSale({ token_id, image_uri, owner_address, price }: NftSaleType) {
         //     ? "shadow-amber-600 shadow-xl hover:shadow-amber-600"
         //     : ""
         // } group flex flex-col bg-gray-800 dark:bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-gray-900 dark:hover:bg-neutral-900 duration-200 ease-in-out`}
-        className="group relative flex flex-col bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-neutral-900 duration-200 ease-in-out"
+        className="group w-60 h-80 relative flex flex-col bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-neutral-900 duration-200 ease-in-out"
       >
         <LooksrareImageLink image_uri={image_uri} token_id={token_id} />
         {price !== "0" && (

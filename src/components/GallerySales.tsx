@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import CardSale, { NftSaleType } from "./CardSale";
-import InputNumber from "./InputNumberSubmit";
+import InputNumber from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 import { Dialog } from "@headlessui/react";
@@ -87,7 +87,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   const [maxStaked, setMaxStaked] = useState("");
   const [selectedSortItem, setSelectedSortItem] = useState(sortItems[0]);
 
-  const pageSize = 60;
+  const pageSize = 40;
   const onPageChange = (page: number) => {
     setCurrentPage(page);
   };
@@ -185,6 +185,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   return (
     <div className="">
       <div className="mx-auto max-w-full py-5 sm:py-10 flex flex-col gap-4">
+        {/* Search field */}
         <div className="flex justify-center">
           <InputNumber
             placeholder="Search Token ID"
@@ -192,10 +193,12 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
             onSubmitFn={null}
           />
         </div>
+        {/* Search result string */}
         <div className="flex justify-center md:pb-10 text-sm">
           <p>{resultsString()}</p>
         </div>
-        <div className="flex md:hidden justify-center pb-10">
+        {/* Filters button hidden in lg */}
+        <div className="flex lg:hidden justify-center pb-10">
           <div
             className={classNames(
               "fixed top-0 left-0 w-full h-screen z-40 bg-neutral-400/70 backdrop-blur-sm",
@@ -210,8 +213,9 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
           </button>
         </div>
         <h2 className="sr-only">MAYC NFTs</h2>
+        {/* Filter column */}
         <div className="flex gap-10">
-          <div className="hidden md:flex flex-col divide-y w-40 xl:w-80 lg:w-60 md:w-48 h-full border-2 border-neutral-700 sticky top-40 rounded-lg px-5">
+          <div className="hidden lg:flex flex-col divide-y basis-80 grow-0 shrink-0 h-full border-2 border-neutral-700 sticky top-40 rounded-lg px-5">
             <FilterRowSwitch
               label="On Sale"
               state={onSale}
@@ -239,13 +243,14 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
               setSelectedItem={setSelectedSortItem}
             />
           </div>
+          {/* Modal filter pop up */}
           <Dialog
             open={isOpen}
             onClose={() => setIsOpen(false)}
-            className="relative z-50 md:hidden"
+            className="relative z-50 lg:hidden"
           >
-            <div className="fixed inset-0 flex items-center justify-center p-4">
-              <Dialog.Panel className="w-full p-6 max-w-sm sm:max-w-md rounded-lg bg-neutral-800 border-2 border-neutral-200 flex flex-col justify-center">
+            <div className="fixed inset-x-0 inset-y-10 flex items-center justify-center p-4">
+              <Dialog.Panel className="w-full max-h-full overflow-auto p-6 max-w-sm sm:max-w-md rounded-lg bg-neutral-800 border-2 border-neutral-200 flex flex-col">
                 <Dialog.Title className="self-center text-lg font-bold">
                   Filters
                 </Dialog.Title>
@@ -285,12 +290,13 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
               </Dialog.Panel>
             </div>
           </Dialog>
+          {/* Grid of cards */}
           <motion.div
             variants={container}
             initial="hidden"
             animate="show"
             exit="exit"
-            className="grid grid-cols-1 gap-y-10 gap-x-6 mx-10 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 2xl:px-20 lg:gap-x-8 flex-1"
+            className="grid gap-y-10 gap-x-10 auto-grid w-full justify-evenly"
           >
             {nftInfo.map((nftItem, idx) => (
               <motion.div
@@ -308,6 +314,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
             ))}
           </motion.div>
         </div>
+        {/* Pagination */}
         <div className="flex w-full justify-center items-center">
           <Pagination
             items={data.length}

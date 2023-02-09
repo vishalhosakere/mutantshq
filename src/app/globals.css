@@ -14,6 +14,9 @@
   html {
     @apply bg-black text-white font-inter;
   }
+  .auto-grid {
+    grid-template-columns: repeat(auto-fill, 15rem);
+  }
 }
 
 * {

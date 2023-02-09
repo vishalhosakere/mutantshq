@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Card, { NftInfoType } from "./Card";
-import InputNumber from "./InputNumberSubmit";
+import InputNumber from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 
@@ -75,13 +75,14 @@ export default function GalleryTags({ allData }: { allData: NftInfoType[] }) {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 xl:gap-x-8"
+          className="grid gap-y-10 gap-x-10 auto-grid w-full justify-evenly"
         >
           {nftInfo.map((nftItem, idx) => (
             <motion.div
               variants={item}
               transition={{ duration: 0.3, delay: idx * 0.05 }}
               key={nftItem.token_id + idx}
+              className="flex justify-center"
             >
               <Card
                 key={nftItem.token_id}

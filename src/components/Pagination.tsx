@@ -1,6 +1,6 @@
 import { classNames, range } from "@/utils/Utils";
 import { FormEvent, useState } from "react";
-import InputNumberSubmit from "./InputNumberSubmit";
+import InputNumberSubmit from "./elements/InputNumberSubmit";
 
 interface PaginationType {
   items: number;
