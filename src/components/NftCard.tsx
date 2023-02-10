@@ -97,7 +97,7 @@ function NftCard({
           )}
         ></div>
         {/* Center div with token ID */}
-        <div className="absolute top-52 left-0 right-0 mx-auto h-10 bg-black w-24 flex justify-center items-center shadow-outer glow-border">
+        <div className="absolute font-bold top-52 left-0 right-0 mx-auto h-10 bg-black w-24 flex justify-center items-center shadow-outer glow-border">
           # {token_id}
         </div>
 

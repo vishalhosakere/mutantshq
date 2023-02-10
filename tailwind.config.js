@@ -13,6 +13,8 @@ module.exports = {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
         nunito: ["Nunito", "sans-serif"],
+        "courier-mono": ["Courier Prime", "monospace"],
+        "share-mono": ["Share Tech Mono", "monospace"],
       },
       colors: {
         accent: "hsl(80, 96%, 46%)",

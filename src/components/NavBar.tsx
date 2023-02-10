@@ -21,7 +21,7 @@ export default function NavBar() {
     >
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-7xl px-2 md:px-6 lg:px-8">
+          <div className="mx-auto px-2 md:px-6 lg:px-8">
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
@@ -34,11 +34,20 @@ export default function NavBar() {
                   )}
                 </Disclosure.Button>
               </div>
-              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-start">
+
+              <div className="absolute inset-y-0 left-10 flex items-center hidden md:block">
+                <Link
+                  href="/"
+                  className="fill-gray-300 hover:fill-white hover:scale-110 flex h-full items-center"
+                >
+                  <Logo />
+                </Link>
+              </div>
+              <div className="flex flex-1 items-center justify-center md:items-stretch md:justify-center">
                 <div className="flex flex-shrink-0 items-center">
                   <Link
                     href="/"
-                    className="fill-gray-300 hover:fill-white hover:scale-110"
+                    className="fill-gray-300 hover:fill-white hover:scale-110 md:hidden"
                   >
                     <Logo />
                   </Link>

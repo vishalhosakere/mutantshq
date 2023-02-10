@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Courier+Prime&family=Share+Tech+Mono&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,7 +12,7 @@
     -moz-appearance: textfield !important;
   }
   html {
-    @apply bg-black text-white font-nunito;
+    @apply bg-black text-white font-share-mono;
   }
 
   /* .text-shadow {
