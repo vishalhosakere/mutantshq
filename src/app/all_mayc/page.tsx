@@ -1,4 +1,4 @@
-import { NftInfoType } from "@/components/Card";
+import { INftCard as NftInfo } from "@/components/NftCard";
 import GallerySales from "@/components/GallerySales";
 
 const cursorStr = "&pagination[cursor]=";
@@ -77,11 +77,10 @@ async function getOwnerData() {
 
 export default async function Owners() {
   const pricesData: TokenIdPriceType[] = await getLooksrareData();
-  const ownerData: NftInfoType[] = await getOwnerData();
+  const ownerData: NftInfo[] = await getOwnerData();
 
   const mergedData = ownerData.map((owner) => {
     return {
-      price: "0",
       // price: value
       // token_id: value
       ...pricesData.find((look) => owner.token_id === look.token_id && look),
@@ -95,7 +94,7 @@ export default async function Owners() {
   return (
     <div className="pt-20 bg-black px-4 sm:px-6 lg:px-16 xl:px-20 flex flex-col">
       <div className="flex flex-1 justify-center text-center">
-        <p className="text-2xl">Every MAYC that every existed</p>
+        <p className="text-2xl">Every MAYC that ever existed</p>
       </div>
 
       <GallerySales allData={mergedData} />

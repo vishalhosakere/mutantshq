@@ -1,4 +1,4 @@
-import GalleryTags from "@/components/GalleryTags";
+import GalleryTags from "@/components/GalleryNoFilter";
 
 async function getData() {
   const response = await fetch(

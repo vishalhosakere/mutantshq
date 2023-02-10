@@ -43,12 +43,12 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex flex-col gap-3 flex-1 justify-center items-center">
+    <div className="flex flex-col gap-3 flex-1 justify-center items-center text-whitish">
       <nav aria-label="Page navigation">
         <ul className="inline-flex items-center gap-0">
           <li>
             <div
-              className="block rounded-l-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
+              className="block rounded-l-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish"
               onClick={() => onClickFn(1)}
             >
               First
@@ -60,9 +60,9 @@ export default function Pagination({
                 <div
                   className={classNames(
                     page === currentPage
-                      ? "border-white text-white bg-neutral-900 pointer-events-none"
-                      : "border-neutral-700 text-neutral-100 bg-neutral-800",
-                    " cursor-pointer border-2 px-3 py-2 leading-tight  hover:bg-neutral-900 hover:text-white"
+                      ? "border-accent bg-neutral-900 pointer-events-none"
+                      : "border-grayish bg-neutral-800",
+                    " cursor-pointer border-2 px-3 py-2 leading-tight  hover:bg-neutral-900"
                   )}
                   onClick={() => onClickFn(page)}
                 >
@@ -74,7 +74,7 @@ export default function Pagination({
 
           <li>
             <div
-              className="block rounded-r-md cursor-pointer  border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
+              className="block rounded-r-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish text-neutral-100 hover:bg-grayish"
               onClick={() => onClickFn(pagesCount)}
             >
               Last
@@ -89,7 +89,7 @@ export default function Pagination({
           onSubmitFn={onSubmitFn}
         />
         <input
-          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
+          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish text-neutral-100 hover:bg-grayish  focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           type="submit"
           onClick={onSubmitFn}
         />

@@ -17,7 +17,7 @@ export default function InputNumber({
       type="number"
       placeholder={placeholder}
       className={classNames(
-        "border-neutral-700 border-2 bg-neutral-800 text-neutral-100 rounded-md pl-2 py-1 text-lg max-w-lg w-20",
+        "border-grayish border-2 bg-neutral-800 text-whitish rounded-md pl-2 py-1 text-lg max-w-lg w-20 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent",
         classes
       )}
       onChange={(e) => {

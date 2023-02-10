@@ -1,6 +1,6 @@
 "use client";
 import { useState } from "react";
-import CardSale, { NftSaleType } from "./CardSale";
+import Card, { INftCard as NftInfo } from "./NftCard";
 import InputNumber from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
@@ -10,11 +10,7 @@ import FilterRowNumber from "./FilterRowNumber";
 import { classNames } from "@/utils/Utils";
 import SortList from "./SortList";
 
-const paginate = (
-  items: NftSaleType[],
-  pageNumber: number,
-  pageSize: number
-) => {
+const paginate = (items: NftInfo[], pageNumber: number, pageSize: number) => {
   const startIndex = (pageNumber - 1) * pageSize;
   return items.slice(startIndex, startIndex + pageSize);
 };
@@ -44,39 +40,39 @@ const sortItems = [
 ];
 
 const sortItemsFunctions = [
-  function tokenLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+  function tokenLowToHigh(option: string, data: NftInfo[]): NftInfo[] {
     return data.sort((a, b) => {
       return parseInt(a.token_id, 16) - parseInt(b.token_id, 16);
     });
   },
-  function tokenHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
+  function tokenHighToLow(option: string, data: NftInfo[]): NftInfo[] {
     return data.sort((a, b) => {
       return parseInt(b.token_id, 16) - parseInt(a.token_id, 16);
     });
   },
-  function priceLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+  function priceLowToHigh(option: string, data: NftInfo[]): NftInfo[] {
     return data.sort((a, b) => {
-      if (a.price === "0") {
-        return 1;
-      } else if (b.price === "0") {
-        return -1;
-      } else {
-        return parseFloat(a.price) - parseFloat(b.price);
-      }
+      const val1 = a.price === undefined ? "9999999999999999" : a.price;
+      const val2 = b.price === undefined ? "9999999999999999" : b.price;
+      return parseFloat(val1) - parseFloat(val2);
     });
   },
-  function priceHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
-    return data.sort((a, b) => parseFloat(b.price) - parseFloat(a.price));
+  function priceHighToLow(option: string, data: NftInfo[]): NftInfo[] {
+    return data.sort((a, b) => {
+      const val1 = a.price === undefined ? "0" : a.price;
+      const val2 = b.price === undefined ? "0" : b.price;
+      return parseFloat(val2) - parseFloat(val1);
+    });
   },
-  function stakedLowToHigh(option: string, data: NftSaleType[]): NftSaleType[] {
+  function stakedLowToHigh(option: string, data: NftInfo[]): NftInfo[] {
     return data;
   },
-  function stakedHighToLow(option: string, data: NftSaleType[]): NftSaleType[] {
+  function stakedHighToLow(option: string, data: NftInfo[]): NftInfo[] {
     return data;
   },
 ];
 
-export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
+export default function GallerySales({ allData }: { allData: NftInfo[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [onSale, setOnSale] = useState(false);
   const [stakedApe, setStakedApe] = useState(false);
@@ -101,7 +97,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   // Filter On Sale
   let data = onSale
     ? searchData.filter((el) => {
-        return el.price !== "0";
+        return el.price !== "0" && el.price !== undefined;
       })
     : searchData;
 
@@ -109,7 +105,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   data =
     minEth !== ""
       ? data.filter((el) => {
-          if (el.price === "0") return false;
+          if (el.price === "0" || el.price === undefined) return false;
           return parseFloat(el.price) > parseFloat(minEth);
         })
       : data;
@@ -118,7 +114,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   data =
     maxEth !== ""
       ? data.filter((el) => {
-          if (el.price === "0") return false;
+          if (el.price === "0" || el.price === undefined) return false;
           return parseFloat(el.price) < parseFloat(maxEth);
         })
       : data;
@@ -127,7 +123,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   data =
     minStaked !== ""
       ? data.filter((el) => {
-          if (el.price === "0") return false;
+          if (el.price === "0" || el.price === undefined) return false;
           return parseFloat(el.price) > parseFloat(minStaked);
         })
       : data;
@@ -136,7 +132,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
   data =
     maxStaked !== ""
       ? data.filter((el) => {
-          if (el.price === "0") return false;
+          if (el.price === "0" || el.price === undefined) return false;
           return parseFloat(el.price) < parseFloat(maxStaked);
         })
       : data;
@@ -296,7 +292,7 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
             initial="hidden"
             animate="show"
             exit="exit"
-            className="grid gap-y-10 gap-x-10 auto-grid w-full justify-evenly"
+            className="grid gap-y-10 gap-x-10 grid-cols-auto-15 w-full justify-evenly"
           >
             {nftInfo.map((nftItem, idx) => (
               <motion.div
@@ -304,11 +300,12 @@ export default function GallerySales({ allData }: { allData: NftSaleType[] }) {
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
                 key={nftItem.token_id + idx}
               >
-                <CardSale
+                <Card
                   image_uri={nftItem.image_uri}
                   token_id={nftItem.token_id}
                   owner_address={nftItem.owner_address}
                   price={nftItem.price}
+                  short_card={false}
                 />
               </motion.div>
             ))}

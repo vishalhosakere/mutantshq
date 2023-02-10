@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -12,10 +12,24 @@
     -moz-appearance: textfield !important;
   }
   html {
-    @apply bg-black text-white font-inter;
+    @apply bg-black text-white font-nunito;
   }
-  .auto-grid {
-    grid-template-columns: repeat(auto-fill, 15rem);
+
+  /* .text-shadow {
+    text-shadow: 2px 2px 0px rgba(0, 0, 0, 1);
+  } */
+}
+
+@layer components {
+  .glow {
+    @apply border-grayish hover:border-accent group-hover:border-accent duration-200 ease-in-out;
+  }
+  .glow-border {
+    @apply border-2 glow rounded-lg;
+  }
+
+  .glow-b-border {
+    @apply border-b-2 glow;
   }
 }
 

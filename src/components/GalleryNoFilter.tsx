@@ -1,15 +1,11 @@
 "use client";
 import { useState } from "react";
-import Card, { NftInfoType } from "./Card";
+import NftCard, { INftCard as NftInfo } from "./NftCard";
 import InputNumber from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 
-const paginate = (
-  items: NftInfoType[],
-  pageNumber: number,
-  pageSize: number
-) => {
+const paginate = (items: NftInfo[], pageNumber: number, pageSize: number) => {
   const startIndex = (pageNumber - 1) * pageSize;
   return items.slice(startIndex, startIndex + pageSize);
 };
@@ -29,7 +25,7 @@ const item = {
   exit: { x: 100 },
 };
 
-export default function GalleryTags({ allData }: { allData: NftInfoType[] }) {
+export default function GalleryNoFilter({ allData }: { allData: NftInfo[] }) {
   const [currentPage, setCurrentPage] = useState(1);
   const pageSize = 20;
   const onPageChange = (page: number) => {
@@ -75,7 +71,7 @@ export default function GalleryTags({ allData }: { allData: NftInfoType[] }) {
           initial="hidden"
           animate="show"
           exit="exit"
-          className="grid gap-y-10 gap-x-10 auto-grid w-full justify-evenly"
+          className="grid gap-y-10 gap-x-10 grid-cols-auto-15 w-full justify-evenly"
         >
           {nftInfo.map((nftItem, idx) => (
             <motion.div
@@ -84,11 +80,12 @@ export default function GalleryTags({ allData }: { allData: NftInfoType[] }) {
               key={nftItem.token_id + idx}
               className="flex justify-center"
             >
-              <Card
+              <NftCard
                 key={nftItem.token_id}
                 image_uri={nftItem.image_uri}
                 token_id={nftItem.token_id}
                 owner_address={nftItem.owner_address}
+                short_card={true}
               />
             </motion.div>
           ))}

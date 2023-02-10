@@ -12,6 +12,27 @@ module.exports = {
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],
+        nunito: ["Nunito", "sans-serif"],
+      },
+      colors: {
+        accent: "hsl(80, 96%, 46%)",
+        "accent-light": "hsl(80, 96%, 71%)",
+        "accent-dark": "hsl(80, 96%, 20%)",
+        "accent-darker": "hsl(80, 96%, 10%)",
+        "accent-darkest": "hsl(65, 71%, 5%)",
+        whitish: "#f5f5f5",
+        grayish: "rgb(64 64 64)",
+      },
+      spacing: {
+        100: "25rem",
+      },
+      boxShadow: {
+        inner: "0px 0px 10px 0px rgba(0, 0, 0, 1) inset",
+        "inner-glow": "0px 0px 10px 0px hsl(65, 71%, 56%) inset",
+        outer: "0px 0px 10px 0px rgba(0, 0, 0, 1)",
+      },
+      gridTemplateColumns: {
+        "auto-15": "repeat(auto-fill, 15rem)",
       },
     },
   },

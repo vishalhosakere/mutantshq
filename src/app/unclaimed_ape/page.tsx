@@ -1,4 +1,4 @@
-import GalleryTags from "@/components/GalleryTags";
+import GalleryNoFilter from "@/components/GalleryNoFilter";
 
 async function getData() {
   const response = await fetch(
@@ -18,7 +18,7 @@ export default async function NoTransfers() {
         <p className="text-2xl">All Apes that forgot to claim ApeCoin</p>
       </div>
 
-      <GalleryTags allData={allData} />
+      <GalleryNoFilter allData={allData} />
     </div>
   );
 }
