@@ -1,15 +1,22 @@
 import NftImage from "./elements/NftImage";
 import Image from "next/image";
 import { classNames } from "@/utils/Utils";
+import { BigNumber, FixedNumber, ethers } from "ethers";
 
 export interface INftCard {
-  image_uri: string;
   token_id: string;
+  image_uri: string;
   owner_address: string;
   price?: string;
-  staked?: string;
-  unclaimed?: string;
+  staked_apecoin?: string;
+  rewards_debt?: string;
+  accumated_rewards?: string;
+  ape_to_eth?: string;
   short_card: boolean;
+}
+
+function fixed2Points(value: string) {
+  return parseFloat(parseFloat(value).toFixed(2));
 }
 
 function NftCard({
@@ -18,13 +25,53 @@ function NftCard({
   owner_address,
   price,
   short_card,
-  staked,
-  unclaimed,
+  staked_apecoin,
+  rewards_debt,
+  accumated_rewards,
+  ape_to_eth,
 }: INftCard) {
-  const priceStr = price === "0" || price === undefined ? "---" : price;
-  const stakedStr = staked === "0" || staked === undefined ? "---" : price;
-  const unclaimedStr = "---";
-  const netPriceStr = price === "0" || price === undefined ? "---" : price;
+  const APE_COIN_PRECISION = FixedNumber.from("1000000000000000000");
+
+  // Price String
+  const priceStr =
+    price === "0" || price === undefined ? "---" : `${fixed2Points(price)} ETH`;
+
+  // Staked APE String
+  const stakedStr =
+    staked_apecoin === "0.0" || staked_apecoin === undefined
+      ? "---"
+      : `${fixed2Points(staked_apecoin)} APE`;
+
+  // Unlclaimed Rewards String
+  let unclaimedStr = "---";
+  // Calculate unclaimed rewards only if they have staked
+  if (staked_apecoin !== "0.0" && staked_apecoin !== undefined) {
+    const stake =
+      FixedNumber.from(staked_apecoin).mulUnsafe(APE_COIN_PRECISION);
+    const debt = FixedNumber.from(rewards_debt).mulUnsafe(APE_COIN_PRECISION);
+    // Equation from ApeStaking Contract
+    const unclaimed = FixedNumber.from(accumated_rewards)
+      .mulUnsafe(stake)
+      .subUnsafe(debt)
+      .divUnsafe(APE_COIN_PRECISION)
+      .divUnsafe(APE_COIN_PRECISION);
+    unclaimedStr = fixed2Points(unclaimed.toString()) + " APE";
+  }
+
+  // Net Price String
+  let netPriceStr = "---";
+  {
+    if (
+      price !== "0.0" &&
+      price !== undefined &&
+      ape_to_eth !== undefined &&
+      staked_apecoin !== undefined
+    ) {
+      const net =
+        parseFloat(price) - parseFloat(ape_to_eth) * parseFloat(staked_apecoin);
+      netPriceStr = fixed2Points(net.toString()) + " ETH";
+    }
+  }
 
   return (
     <>
@@ -99,22 +146,22 @@ function NftCard({
               <div className="flex justify-between gap-1 glow-b-border border-dashed">
                 <div className="flex flex-col flex-1">
                   <div className="text-accent-light pt-2">PRICE</div>
-                  <div className=" pb-3 ">{priceStr} ETH</div>
+                  <div className="pb-3 ">{priceStr}</div>
                 </div>
                 <div className="flex flex-col flex-1">
                   <div className="text-accent-light pt-2">STAKED</div>
-                  <div className="pb-3">{stakedStr} APE</div>
+                  <div className="pb-3">{stakedStr}</div>
                 </div>
               </div>
 
               <div className="flex justify-between gap-1">
                 <div className="flex flex-col flex-1">
                   <div className="text-accent-light pt-3">UNCLAIMED</div>
-                  <div className="pb-1">{unclaimedStr} APE</div>
+                  <div className="pb-1">{unclaimedStr}</div>
                 </div>
                 <div className="flex flex-col flex-1">
                   <div className="text-accent-light pt-3">NET PRICE</div>
-                  <div className="pb-1">{netPriceStr} ETH</div>
+                  <div className="pb-1">{netPriceStr}</div>
                 </div>
               </div>
             </div>

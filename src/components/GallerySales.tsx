@@ -65,14 +65,38 @@ const sortItemsFunctions = [
     });
   },
   function stakedLowToHigh(option: string, data: NftInfo[]): NftInfo[] {
-    return data;
+    return data.sort((a, b) => {
+      const val1 =
+        a.staked_apecoin === undefined || a.staked_apecoin == "0.0"
+          ? "9999999999999999"
+          : a.staked_apecoin;
+      const val2 =
+        b.staked_apecoin === undefined || b.staked_apecoin == "0.0"
+          ? "9999999999999999"
+          : b.staked_apecoin;
+      return parseFloat(val1) - parseFloat(val2);
+    });
   },
   function stakedHighToLow(option: string, data: NftInfo[]): NftInfo[] {
-    return data;
+    return data.sort((a, b) => {
+      const val1 = a.staked_apecoin === undefined ? "0" : a.staked_apecoin;
+      const val2 = b.staked_apecoin === undefined ? "0" : b.staked_apecoin;
+      return parseFloat(val2) - parseFloat(val1);
+    });
   },
 ];
 
-export default function GallerySales({ allData }: { allData: NftInfo[] }) {
+interface IGallerySales {
+  allData: NftInfo[];
+  accumatedRewards: string;
+  apeToEth: string;
+}
+
+export default function GallerySales({
+  allData,
+  accumatedRewards,
+  apeToEth,
+}: IGallerySales) {
   const [currentPage, setCurrentPage] = useState(1);
   const [onSale, setOnSale] = useState(false);
   const [stakedApe, setStakedApe] = useState(false);
@@ -101,6 +125,13 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
       })
     : searchData;
 
+  // Filter Staked APE
+  data = stakedApe
+    ? data.filter((el) => {
+        return el.staked_apecoin !== "0.0" && el.staked_apecoin !== undefined;
+      })
+    : data;
+
   // Filter Min Eth
   data =
     minEth !== ""
@@ -119,21 +150,23 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
         })
       : data;
 
-  // Filter Min Eth
+  // Filter Min Staked
   data =
     minStaked !== ""
       ? data.filter((el) => {
-          if (el.price === "0" || el.price === undefined) return false;
-          return parseFloat(el.price) > parseFloat(minStaked);
+          if (el.staked_apecoin === "0.0" || el.staked_apecoin === undefined)
+            return false;
+          return parseFloat(el.staked_apecoin) > parseFloat(minStaked);
         })
       : data;
 
-  // Filter Max Eth
+  // Filter Max Staked
   data =
     maxStaked !== ""
       ? data.filter((el) => {
-          if (el.price === "0" || el.price === undefined) return false;
-          return parseFloat(el.price) < parseFloat(maxStaked);
+          if (el.staked_apecoin === "0.0" || el.staked_apecoin === undefined)
+            return false;
+          return parseFloat(el.staked_apecoin) < parseFloat(maxStaked);
         })
       : data;
 
@@ -218,7 +251,7 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
               setState={setOnSale}
             />
             <FilterRowSwitch
-              label="Staked $APE"
+              label="Staked APE"
               state={stakedApe}
               setState={setStakedApe}
             />
@@ -228,7 +261,7 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
               maxChanged={maxEthChanged}
             />
             <FilterRowNumber
-              label="Staked $APE Range"
+              label="Staked APE Range"
               minChanged={minStakedChanged}
               maxChanged={maxStakedChanged}
             />
@@ -246,7 +279,7 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
             className="relative z-50 lg:hidden"
           >
             <div className="fixed inset-x-0 inset-y-10 flex items-center justify-center p-4">
-              <Dialog.Panel className="w-full max-h-full overflow-auto p-6 max-w-sm sm:max-w-md rounded-lg bg-neutral-800 border-2 border-neutral-200 flex flex-col">
+              <Dialog.Panel className="w-full max-h-full overflow-auto p-6 max-w-sm sm:max-w-md rounded-lg bg-black border-2 border-accent flex flex-col">
                 <Dialog.Title className="self-center text-lg font-bold">
                   Filters
                 </Dialog.Title>
@@ -257,7 +290,7 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
                   setState={setOnSale}
                 />
                 <FilterRowSwitch
-                  label="Staked $APE"
+                  label="Staked APE"
                   state={stakedApe}
                   setState={setStakedApe}
                 />
@@ -267,7 +300,7 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
                   maxChanged={maxEthChanged}
                 />
                 <FilterRowNumber
-                  label="Staked $APE Range"
+                  label="Staked APE Range"
                   minChanged={minStakedChanged}
                   maxChanged={maxStakedChanged}
                 />
@@ -305,6 +338,10 @@ export default function GallerySales({ allData }: { allData: NftInfo[] }) {
                   token_id={nftItem.token_id}
                   owner_address={nftItem.owner_address}
                   price={nftItem.price}
+                  staked_apecoin={nftItem.staked_apecoin}
+                  rewards_debt={nftItem.rewards_debt}
+                  accumated_rewards={accumatedRewards}
+                  ape_to_eth={apeToEth}
                   short_card={false}
                 />
               </motion.div>
