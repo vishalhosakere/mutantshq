@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="w-full h-screen flex justify-center items-center">
+    <div className="absolute inset-0 w-full h-screen flex justify-center items-center">
       <div role="status">
         <svg
           aria-hidden="true"
