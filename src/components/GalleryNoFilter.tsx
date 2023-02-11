@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import NftCard, { INftCard as NftInfo } from "./NftCard";
-import InputNumber from "./elements/InputNumberSubmit";
+import InputNumberSubmit from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 
@@ -53,16 +53,17 @@ export default function GalleryNoFilter({ allData }: { allData: NftInfo[] }) {
   };
   return (
     <div className="">
-      <div className="mx-auto max-w-full py-5 sm:py-10 flex flex-col gap-4">
-        <div className="flex justify-center">
-          <InputNumber
+      <div className="mx-auto max-w-full py-10 flex flex-col gap-4">
+        <div className="flex mx-10 pb-10 gap-3 justify-center flex-col lg:flex-row lg:gap-10">
+          <InputNumberSubmit
             placeholder="Search Token ID"
             onChangeFn={searchChanged}
             onSubmitFn={null}
+            classes="w-full self-center"
           />
-        </div>
-        <div className="flex justify-center pb-10 text-sm">
-          <p>{resultsString()}</p>
+          <div className="flex justify-center items-center flex-shrink-0">
+            <p>{resultsString()}</p>
+          </div>
         </div>
         <h2 className="sr-only">MAYC NFTs</h2>
 

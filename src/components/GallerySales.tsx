@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import Card, { INftCard as NftInfo } from "./NftCard";
-import InputNumber from "./elements/InputNumberSubmit";
+import InputNumberSubmit from "./elements/InputNumberSubmit";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 import { Dialog } from "@headlessui/react";
@@ -214,19 +214,19 @@ export default function GallerySales({
   return (
     <div className="">
       <div className="mx-auto max-w-full py-5 sm:py-10 flex flex-col gap-4">
-        {/* Search field */}
-        <div className="flex justify-center">
-          <InputNumber
+        <div className="flex mx-10 pb-2 gap-3 justify-center flex-col lg:flex-row lg:gap-10 lg:pb-10">
+          {/* Search field */}
+          <InputNumberSubmit
             placeholder="Search Token ID"
             onChangeFn={searchChanged}
             onSubmitFn={null}
+            classes="w-full self-center"
           />
+          {/* Search result string */}
+          <div className="flex justify-center items-center flex-shrink-0">
+            <p>{resultsString()}</p>
+          </div>
         </div>
-        {/* Search result string */}
-        <div className="flex justify-center md:pb-10 text-sm">
-          <p>{resultsString()}</p>
-        </div>
-        {/* Filters button hidden in lg */}
         <div className="flex lg:hidden justify-center pb-10">
           <div
             className={classNames(
