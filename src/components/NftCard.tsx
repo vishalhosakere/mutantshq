@@ -76,11 +76,6 @@ function NftCard({
   return (
     <>
       <div
-        // className={`${
-        //   parseInt(unclaimed) !== 0
-        //     ? "shadow-amber-600 shadow-xl hover:shadow-amber-600"
-        //     : ""
-        // } group flex flex-col bg-gray-800 dark:bg-neutral-800 rounded-xl text-gray-200 hover:shadow-xl hover:text-white hover:bg-gray-900 dark:hover:bg-neutral-900 duration-200 ease-in-out`}
         className={classNames(
           short_card === true ? "h-[17.75rem]" : "h-100",
           "group w-60  relative flex flex-col bg-black glow-border rounded-xl p-3"

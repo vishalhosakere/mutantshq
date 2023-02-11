@@ -20,10 +20,11 @@ module.exports = {
         accent: "hsl(80, 96%, 46%)",
         "accent-light": "hsl(80, 96%, 71%)",
         "accent-dark": "hsl(80, 96%, 20%)",
-        "accent-darker": "hsl(80, 96%, 10%)",
+        "accent-darker": "hsl(80, 96%, 12%)",
         "accent-darkest": "hsl(65, 71%, 5%)",
         whitish: "#f5f5f5",
         grayish: "rgb(64 64 64)",
+        "dark-gray": "rgb(12 12 12)",
       },
       spacing: {
         100: "25rem",

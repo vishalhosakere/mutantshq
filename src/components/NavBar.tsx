@@ -17,7 +17,7 @@ export default function NavBar() {
   return (
     <Disclosure
       as="nav"
-      className="backdrop-blur-md bg-neutral-800/80 z-10 fixed w-full "
+      className="backdrop-blur-md bg-dark-gray/80 z-10 fixed w-full border-b-2 border-b-grayish/50"
     >
       {({ open }) => (
         <>
@@ -25,7 +25,7 @@ export default function NavBar() {
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-whitish hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />

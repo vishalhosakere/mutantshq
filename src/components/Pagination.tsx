@@ -48,7 +48,7 @@ export default function Pagination({
         <ul className="inline-flex items-center gap-0">
           <li>
             <div
-              className="block rounded-l-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish"
+              className="block rounded-l-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-grayish"
               onClick={() => onClickFn(1)}
             >
               First
@@ -61,7 +61,7 @@ export default function Pagination({
                   className={classNames(
                     page === currentPage
                       ? "border-accent bg-neutral-900 pointer-events-none"
-                      : "border-grayish bg-neutral-800",
+                      : "border-grayish bg-dark-gray",
                     " cursor-pointer border-2 px-3 py-2 leading-tight  hover:bg-neutral-900"
                   )}
                   onClick={() => onClickFn(page)}
@@ -74,7 +74,7 @@ export default function Pagination({
 
           <li>
             <div
-              className="block rounded-r-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish text-neutral-100 hover:bg-grayish"
+              className="block rounded-r-md cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-grayish text-neutral-100 hover:bg-grayish"
               onClick={() => onClickFn(pagesCount)}
             >
               Last
@@ -89,7 +89,7 @@ export default function Pagination({
           onSubmitFn={onSubmitFn}
         />
         <input
-          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-grayish text-neutral-100 hover:bg-grayish  focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-grayish text-neutral-100 hover:bg-grayish  focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           type="submit"
           onClick={onSubmitFn}
         />

@@ -235,7 +235,7 @@ export default function GallerySales({
             )}
           ></div>
           <button
-            className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
+            className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-neutral-700 text-whitish hover:bg-neutral-700"
             onClick={() => setIsOpen(true)}
           >
             Filters
@@ -244,7 +244,7 @@ export default function GallerySales({
         <h2 className="sr-only">MAYC NFTs</h2>
         {/* Filter column */}
         <div className="flex gap-10">
-          <div className="hidden lg:flex flex-col divide-y basis-80 grow-0 shrink-0 h-full border-2 border-neutral-700 sticky top-40 rounded-lg px-5">
+          <div className="hidden lg:flex flex-col divide-y divide-grayish basis-80 grow-0 shrink-0 h-full border-2 border-neutral-700 sticky top-40 rounded-lg px-5">
             <FilterRowSwitch
               label="On Sale"
               state={onSale}
@@ -284,38 +284,40 @@ export default function GallerySales({
                   Filters
                 </Dialog.Title>
 
-                <FilterRowSwitch
-                  label="On Sale"
-                  state={onSale}
-                  setState={setOnSale}
-                />
-                <FilterRowSwitch
-                  label="Staked APE"
-                  state={stakedApe}
-                  setState={setStakedApe}
-                />
-                <FilterRowNumber
-                  label="Price Range"
-                  minChanged={minEthChanged}
-                  maxChanged={maxEthChanged}
-                />
-                <FilterRowNumber
-                  label="Staked APE Range"
-                  minChanged={minStakedChanged}
-                  maxChanged={maxStakedChanged}
-                />
-                <SortList
-                  label="Sort Results"
-                  listItems={sortItems}
-                  selectedItem={selectedSortItem}
-                  setSelectedItem={setSelectedSortItem}
-                />
-                <button
-                  className="block mt-6 rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-neutral-800 border-neutral-700 text-neutral-100 hover:bg-neutral-700 hover:text-white"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Close
-                </button>
+                <div className="flex flex-col divide-y divide-grayish">
+                  <FilterRowSwitch
+                    label="On Sale"
+                    state={onSale}
+                    setState={setOnSale}
+                  />
+                  <FilterRowSwitch
+                    label="Staked APE"
+                    state={stakedApe}
+                    setState={setStakedApe}
+                  />
+                  <FilterRowNumber
+                    label="Price Range"
+                    minChanged={minEthChanged}
+                    maxChanged={maxEthChanged}
+                  />
+                  <FilterRowNumber
+                    label="Staked APE Range"
+                    minChanged={minStakedChanged}
+                    maxChanged={maxStakedChanged}
+                  />
+                  <SortList
+                    label="Sort Results"
+                    listItems={sortItems}
+                    selectedItem={selectedSortItem}
+                    setSelectedItem={setSelectedSortItem}
+                  />
+                  <button
+                    className="block mt-6 rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-neutral-700 text-whitish hover:bg-neutral-700"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Close
+                  </button>
+                </div>
               </Dialog.Panel>
             </div>
           </Dialog>
