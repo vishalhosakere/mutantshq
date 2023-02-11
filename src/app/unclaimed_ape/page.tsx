@@ -2,7 +2,8 @@ import GalleryNoFilter from "@/components/GalleryNoFilter";
 
 async function getData() {
   const response = await fetch(
-    "https://mutantstatsapi.netlify.app/api/unclaimedape"
+    "https://mutantstatsapi.netlify.app/api/unclaimedape",
+    { cache: "no-store" }
   );
   const json = await response.json();
   // await delay(300000);

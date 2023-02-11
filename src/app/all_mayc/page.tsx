@@ -47,7 +47,7 @@ async function getLooksrareData() {
   do {
     const cursorUrl: string =
       data.length === 0 ? url : `${url}${cursorStr}${cursor}`;
-    const response = await fetch(cursorUrl);
+    const response = await fetch(cursorUrl, { cache: "no-store" });
     const json = await response.json();
     data = json.data;
     allData.push(...data);
@@ -73,7 +73,8 @@ async function getLooksrareData() {
 
 async function getOwnerData() {
   const response = await fetch(
-    "https://mutantstatsapi.netlify.app/api/allowners"
+    "https://mutantstatsapi.netlify.app/api/allowners",
+    { cache: "no-store" }
   );
   const json = await response.json();
   return json;
@@ -137,7 +138,7 @@ async function getContractData() {
 
 async function getApeToEth() {
   const url = "https://api.coinbase.com/v2/exchange-rates?currency=APE";
-  const response = await fetch(url);
+  const response = await fetch(url, { cache: "no-store" });
   const json = await response.json();
   return json.data.rates["ETH"];
 }

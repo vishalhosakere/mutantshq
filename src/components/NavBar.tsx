@@ -35,7 +35,7 @@ export default function NavBar() {
                 </Disclosure.Button>
               </div>
 
-              <div className="absolute inset-y-0 left-10 flex items-center hidden md:block">
+              <div className="absolute inset-y-0 left-10 items-center hidden md:flex">
                 <Link
                   href="/"
                   className="fill-gray-300 hover:fill-white hover:scale-110 flex h-full items-center"
