@@ -9,6 +9,7 @@ import FilterRowSwitch from "./FilterRowSwitch";
 import FilterRowNumber from "./FilterRowNumber";
 import { classNames } from "@/utils/Utils";
 import SortList from "./SortList";
+import { Tooltip, TooltipProvider } from "react-tooltip";
 
 const paginate = (items: NftInfo[], pageNumber: number, pageSize: number) => {
   const startIndex = (pageNumber - 1) * pageSize;
@@ -322,33 +323,39 @@ export default function GallerySales({
             </div>
           </Dialog>
           {/* Grid of cards */}
-          <motion.div
-            variants={container}
-            initial="hidden"
-            animate="show"
-            exit="exit"
-            className="grid gap-y-10 gap-x-10 grid-cols-auto-15 w-full justify-evenly"
-          >
-            {nftInfo.map((nftItem, idx) => (
-              <motion.div
-                variants={item}
-                transition={{ duration: 0.3, delay: idx * 0.05 }}
-                key={nftItem.token_id + idx}
-              >
-                <Card
-                  image_uri={nftItem.image_uri}
-                  token_id={nftItem.token_id}
-                  owner_address={nftItem.owner_address}
-                  price={nftItem.price}
-                  staked_apecoin={nftItem.staked_apecoin}
-                  rewards_debt={nftItem.rewards_debt}
-                  accumated_rewards={accumatedRewards}
-                  ape_to_eth={apeToEth}
-                  short_card={false}
-                />
-              </motion.div>
-            ))}
-          </motion.div>
+          <TooltipProvider>
+            <motion.div
+              variants={container}
+              initial="hidden"
+              animate="show"
+              exit="exit"
+              className="grid gap-y-10 gap-x-10 grid-cols-auto-15 w-full justify-evenly"
+            >
+              {nftInfo.map((nftItem, idx) => (
+                <motion.div
+                  variants={item}
+                  transition={{ duration: 0.3, delay: idx * 0.05 }}
+                  key={nftItem.token_id + idx}
+                >
+                  <Card
+                    image_uri={nftItem.image_uri}
+                    token_id={nftItem.token_id}
+                    owner_address={nftItem.owner_address}
+                    price={nftItem.price}
+                    staked_apecoin={nftItem.staked_apecoin}
+                    rewards_debt={nftItem.rewards_debt}
+                    accumated_rewards={accumatedRewards}
+                    ape_to_eth={apeToEth}
+                    short_card={false}
+                  />
+                </motion.div>
+              ))}
+            </motion.div>
+            <Tooltip
+              place="top"
+              className="!text-sm !bg-accent !text-black !p-1 !rounded-md"
+            />
+          </TooltipProvider>
         </div>
         {/* Pagination */}
         <div className="flex w-full justify-center items-center">

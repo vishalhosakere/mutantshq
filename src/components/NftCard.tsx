@@ -3,8 +3,7 @@ import Image from "next/image";
 import { classNames } from "@/utils/Utils";
 import { BigNumber, FixedNumber, ethers } from "ethers";
 import { useState } from "react";
-import { Tooltip } from "react-tooltip";
-
+import { TooltipWrapper } from "react-tooltip";
 export interface INftCard {
   token_id: string;
   image_uri: string;
@@ -114,54 +113,48 @@ function NftCard({
           // Left side logos
           <div className="absolute mt-0 -ml-2.5 flex flex-col gap-2">
             {/* All Tooltips */}
-            <Tooltip
-              anchorId="looksrare-tool-anchor"
-              content="Looksrare"
-              place="top"
-              className="!text-sm !bg-accent !text-black !p-1 !rounded-md"
-            />
-            <Tooltip
-              anchorId="apecoin-tool-anchor"
-              content="APE Marketplace"
-              place="top"
-              className="!text-sm !bg-accent !text-black !p-1 !rounded-md"
-            />
             {price !== "0" && price !== undefined ? (
-              <a
-                href={`https://looksrare.org/collections/0x60E4d786628Fea6478F785A6d7e704777c86a7c6/${token_id}`}
-                target="_blank"
-                rel="noreferrer"
+              <TooltipWrapper
+                content="Looksrare"
                 className={classNames(
                   flipped ? "hidden" : "group-hover:translate-x-2",
                   "relative w-8 h-8 rounded-full shadow-xl shadow-black glow-border border-accent-light hover:scale-110"
                 )}
-                id="looksrare-tool-anchor"
               >
-                <Image
-                  src="/looksrare-logo.png"
-                  fill={true}
-                  alt="Looksrare Logo"
-                />
-              </a>
+                <a
+                  href={`https://looksrare.org/collections/0x60E4d786628Fea6478F785A6d7e704777c86a7c6/${token_id}`}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Image
+                    src="/looksrare-logo.png"
+                    fill={true}
+                    alt="Looksrare Logo"
+                  />
+                </a>
+              </TooltipWrapper>
             ) : (
               ""
             )}
-            <a
-              href={`https://www.apecoinmarketplace.com/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens/${token_id}`}
-              target="_blank"
-              rel="noreferrer"
+            <TooltipWrapper
+              content="APE Marketplace"
               className={classNames(
                 flipped ? "hidden" : "group-hover:translate-x-2",
                 "relative w-8 h-8 rounded-full shadow-xl shadow-black glow-border border-accent-light hover:scale-110"
               )}
-              id="apecoin-tool-anchor"
             >
-              <Image
-                src="/apecoin-icon.png"
-                fill={true}
-                alt="Apecoin Marketplace Logo"
-              />
-            </a>
+              <a
+                href={`https://www.apecoinmarketplace.com/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens/${token_id}`}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <Image
+                  src="/apecoin-icon.png"
+                  fill={true}
+                  alt="Apecoin Marketplace Logo"
+                />
+              </a>
+            </TooltipWrapper>
           </div>
         ) : (
           //   <div className="w-8 h-8 grayscale absolute mt-9 -ml-3 pointer-events-none z-10 rounded-full shadow-xl shadow-black border-2 border-lime-200 group-hover:border-[#D0DE40] group-hover:translate-x-2 duration-200 ease-in-out">
