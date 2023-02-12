@@ -31,6 +31,22 @@
   .glow-b-border {
     @apply border-b-2 glow;
   }
+
+  .front {
+    position: relative;
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(0deg);
+  }
+  .rotate-y-180 {
+    transform: perspective(1000px) rotateY(180deg);
+  }
+  .back {
+    backface-visibility: hidden;
+    transform: perspective(1000px) rotateY(-180deg);
+  }
+  .rotate-y-0 {
+    transform: perspective(1000px) rotateY(0deg);
+  }
 }
 
 * {

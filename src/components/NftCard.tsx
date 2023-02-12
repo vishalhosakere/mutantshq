@@ -2,6 +2,7 @@ import NftImage from "./elements/NftImage";
 import Image from "next/image";
 import { classNames } from "@/utils/Utils";
 import { BigNumber, FixedNumber, ethers } from "ethers";
+import { useState } from "react";
 
 export interface INftCard {
   token_id: string;
@@ -73,13 +74,25 @@ function NftCard({
     }
   }
 
+  const ownerStr =
+    owner_address.slice(1, 5) +
+    "..." +
+    owner_address.slice(owner_address.length - 3, owner_address.length);
+
+  const [flipped, setFlipped] = useState(false);
+
   return (
-    <>
+    <div className="card relative">
       <div
         className={classNames(
           short_card === true ? "h-[17.75rem]" : "h-100",
-          "group w-60  relative flex flex-col bg-black glow-border rounded-xl p-3"
+          flipped ? "rotate-y-180" : "",
+          "group w-60  relative flex flex-col bg-black glow-border rounded-xl p-3 front"
         )}
+        onClick={() => {
+          console.log("Clicked Frontside");
+          setFlipped(!flipped);
+        }}
       >
         {/* Render this first since logos go on top */}
         <NftImage image_uri={image_uri} token_id={token_id} />
@@ -103,7 +116,10 @@ function NftCard({
               href={`https://looksrare.org/collections/0x60E4d786628Fea6478F785A6d7e704777c86a7c6/${token_id}`}
               target="_blank"
               rel="noreferrer"
-              className="w-8 h-8 absolute mt-0 -ml-3 rounded-full shadow-xl shadow-black glow-border border-accent-light group-hover:translate-x-2 hover:scale-105"
+              className={classNames(
+                flipped ? "hidden" : "group-hover:translate-x-2",
+                "w-8 h-8 absolute mt-0 -ml-3 rounded-full shadow-xl shadow-black glow-border border-accent-light hover:scale-105"
+              )}
             >
               <Image
                 src="/looksrare-logo.png"
@@ -163,7 +179,33 @@ function NftCard({
           </div>
         )}
       </div>
-    </>
+
+      <div
+        className={classNames(
+          flipped ? "rotate-y-0" : "",
+          "absolute group inset-0 back rounded-xl glow-border p-3"
+        )}
+        onClick={() => {
+          console.log("Clicked Backside");
+          setFlipped(!flipped);
+        }}
+      >
+        <div className="glow-border w-full h-full group-hover:shadow-inner-glow flex justify-center items-center text-center">
+          <a
+            href={`https://etherscan.io/address/${owner_address}`}
+            rel="noreferrer"
+            target="_blank"
+          >
+            <>
+              <div>Owner</div>
+              <div className="text-accent-light font-bold text-lg">
+                {ownerStr}
+              </div>
+            </>
+          </a>
+        </div>
+      </div>
+    </div>
   );
 }
 
