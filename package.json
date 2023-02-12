@@ -29,6 +29,7 @@
     "react-apexcharts": "^1.4.0",
     "react-dom": "18.2.0",
     "react-spinners": "^0.13.8",
+    "react-tooltip": "^5.7.5",
     "typescript": "4.9.5",
     "utf-8-validate": "^5.0.10"
   },
