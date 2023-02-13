@@ -22,7 +22,7 @@ async function getContractData() {
   const pool = await contract.pools(2);
   const block = await provider.getBlock("latest");
 
-  async function getPreviousTimestampHour() {
+  async function getPreviousTimestampHour(block: ethers.providers.Block) {
     const min_secs = block.timestamp % SECONDS_PER_HOUR;
     const mins = Math.floor(min_secs / SECONDS_PER_MINUTE);
     const secs = Math.floor(block.timestamp / SECONDS_PER_MINUTE);
@@ -30,7 +30,7 @@ async function getContractData() {
     return Math.floor(block.timestamp - (mins * 60 + secs));
   }
 
-  const previousTimeStampHour = await getPreviousTimestampHour();
+  const previousTimeStampHour = await getPreviousTimestampHour(block);
   const { rewardsSinceLastCalculated, _ } = await contract.rewardsBy(
     2,
     ethers.BigNumber.from(pool.lastRewardedTimestampHour),

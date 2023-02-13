@@ -353,7 +353,7 @@ export default function GallerySales({
             </motion.div>
             <Tooltip
               place="top"
-              className="!text-sm !bg-accent !text-black !p-1 !rounded-md"
+              className="!text-sm !bg-accent !text-black !p-1 !rounded-md !pointer-events-none"
             />
           </TooltipProvider>
         </div>

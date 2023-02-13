@@ -125,6 +125,9 @@ function NftCard({
                   href={`https://looksrare.org/collections/0x60E4d786628Fea6478F785A6d7e704777c86a7c6/${token_id}`}
                   target="_blank"
                   rel="noreferrer"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                  }}
                 >
                   <Image
                     src="/looksrare-logo.png"
@@ -147,6 +150,9 @@ function NftCard({
                 href={`https://www.apecoinmarketplace.com/collections/0x60e4d786628fea6478f785a6d7e704777c86a7c6/tokens/${token_id}`}
                 target="_blank"
                 rel="noreferrer"
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
               >
                 <Image
                   src="/apecoin-icon.png"
