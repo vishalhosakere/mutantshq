@@ -43,7 +43,7 @@ export default function Pagination({
   };
 
   return (
-    <div className="flex flex-col gap-3 flex-1 justify-center items-center text-whitish">
+    <div className="flex flex-col gap-3 flex-1 justify-center items-center text-whitish pt-10">
       <nav aria-label="Page navigation">
         <ul className="inline-flex items-center gap-0">
           <li>
@@ -89,7 +89,7 @@ export default function Pagination({
           onSubmitFn={onSubmitFn}
         />
         <input
-          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-grayish text-neutral-100 hover:bg-grayish  focus:outline-none focus-visible:ring-2 focus-visible:ring-accent"
+          className="block rounded-lg cursor-pointer border-2 px-3 py-2 ml-0 leading-tight bg-dark-gray border-grayish text-neutral-100 hover:bg-grayish focus-accent"
           type="submit"
           onClick={onSubmitFn}
         />

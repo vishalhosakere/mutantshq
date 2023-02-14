@@ -20,7 +20,7 @@ export default function FilterRowSwitch({
           checked={state}
           onChange={setState}
           className={`${state ? "bg-accent" : "bg-accent-darker"}
-          relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus:outline-none focus-visible:ring-2 focus-visible:ring-accent`}
+          relative inline-flex h-7 w-14 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out focus-accent`}
         >
           <span className="sr-only">{`Set ${label} filter`}</span>
           <span

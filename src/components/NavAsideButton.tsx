@@ -21,7 +21,7 @@ export default function NavAsideButton({
         href == currentRoute
           ? "bg-accent-darker text-whitish"
           : "text-gray-300 hover:bg-neutral-700",
-        "block px-3 py-2 rounded-md text-base font-bold"
+        "block px-3 py-2 rounded-md text-base font-bold  focus-accent"
       )}
       aria-current={href == currentRoute ? "page" : undefined}
     >

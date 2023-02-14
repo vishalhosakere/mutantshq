@@ -5,13 +5,7 @@ import NavButton from "./NavButton";
 import Logo from "./Logo";
 import Link from "next/link";
 import NavAsideButton from "./NavAsideButton";
-
-const navigation = [
-  { name: "DASHBOARD", href: "/dashboard", current: true },
-  { name: "ALL MAYC", href: "/all_mayc", current: false },
-  { name: "UNCLAIMED APE", href: "/unclaimed_ape", current: false },
-  { name: "NO TRANSFERS", href: "/no_transfers", current: false },
-];
+import { NavLinkItems } from "@/utils/NavLinkItems";
 
 export default function NavBar() {
   return (
@@ -25,7 +19,7 @@ export default function NavBar() {
             <div className="relative flex h-16 items-center justify-between">
               <div className="absolute inset-y-0 left-0 flex items-center md:hidden">
                 {/* Mobile menu button*/}
-                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-whitish hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-accent">
+                <Disclosure.Button className="inline-flex items-center justify-center rounded-md p-2 text-whitish hover:bg-gray-700 focus-accent">
                   <span className="sr-only">Open main menu</span>
                   {open ? (
                     <XMarkIcon className="block h-6 w-6" aria-hidden="true" />
@@ -54,7 +48,7 @@ export default function NavBar() {
                 </div>
                 <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4 pt-0.5">
-                    {navigation.map((item, idx) => (
+                    {NavLinkItems.map((item, idx) => (
                       <NavButton key={idx} name={item.name} href={item.href} />
                     ))}
                   </div>
@@ -65,7 +59,7 @@ export default function NavBar() {
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item, idx) => (
+              {NavLinkItems.map((item, idx) => (
                 <NavAsideButton key={idx} name={item.name} href={item.href} />
               ))}
             </div>

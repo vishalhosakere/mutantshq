@@ -32,6 +32,10 @@
     @apply border-b-2 glow;
   }
 
+  .focus-accent {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-accent;
+  }
+
   .front {
     position: relative;
     backface-visibility: hidden;

@@ -19,7 +19,7 @@ export default function SortList({
     <div className="relative w-full flex flex-col pt-3 pb-4">
       <div className="pb-1">{label}</div>
       <Listbox value={listItems} onChange={setSelectedItem}>
-        <Listbox.Button className="border-2 border-grayish p-2 flex-1 rounded-lg bg-dark-gray relative hover:bg-neutral-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-accent">
+        <Listbox.Button className="border-2 border-grayish p-2 flex-1 rounded-lg bg-dark-gray relative hover:bg-neutral-900 focus-accent">
           {selectedItem}
           <ArrowsUpDownIcon className="absolute right-3 top-0 w-5 h-full" />
         </Listbox.Button>
