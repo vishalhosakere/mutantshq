@@ -15,3 +15,12 @@ export function range(start: number, end: number) {
     .fill(0)
     .map((_, idx) => start + idx);
 }
+
+export function fixed2Points(value: string) {
+  return parseFloat(parseFloat(value).toFixed(2));
+}
+
+export function fixedStr2Points(value: number, precision: number) {
+  const val = parseFloat(value.toFixed(precision));
+  return isNaN(val) ? 0 : val;
+}

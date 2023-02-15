@@ -37,6 +37,10 @@ module.exports = {
       gridTemplateColumns: {
         "auto-15": "repeat(auto-fill, 15rem)",
       },
+      maxWidth: {
+        "8xl": "88rem",
+        "9xl": "96rem",
+      },
     },
   },
   plugins: [require("@tailwindcss/aspect-ratio")],

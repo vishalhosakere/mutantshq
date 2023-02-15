@@ -4,6 +4,8 @@ import { classNames } from "@/utils/Utils";
 import { BigNumber, FixedNumber, ethers } from "ethers";
 import { useState } from "react";
 import { TooltipWrapper } from "react-tooltip";
+import { fixed2Points } from "@/utils/Utils";
+
 export interface INftCard {
   token_id: string;
   image_uri: string;
@@ -14,10 +16,6 @@ export interface INftCard {
   accumated_rewards?: string;
   ape_to_eth?: string;
   short_card: boolean;
-}
-
-function fixed2Points(value: string) {
-  return parseFloat(parseFloat(value).toFixed(2));
 }
 
 function NftCard({
