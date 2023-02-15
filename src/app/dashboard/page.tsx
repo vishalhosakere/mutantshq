@@ -88,7 +88,7 @@ export default function Dashboard() {
     {
       label: "Monthly:",
       value: `${fixedStr2Points(
-        (Q1rewardPerHour * ape * 24 * 7 * 30) / totalStaked,
+        (Q1rewardPerHour * ape * 24 * 30) / totalStaked,
         4
       )} APE`,
     },
