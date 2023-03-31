@@ -7,11 +7,11 @@ export default function Home() {
         <p className="text-3xl uppercase">Mutants HQ</p>
         <p className="text-2xl">One stop place to all info things MAYC</p>
       </div>
-      <div className="flex gap-8 w-full justify-between md:flex-row flex-col focus-accent">
+      <div className="flex gap-8 w-full justify-between md:flex-row flex-col flex-wrap focus-accent">
         {NavLinkItems.slice(1).map((item) => {
           return (
             <div
-              className="flex-1 hover:shadow-inner-glow glow-border "
+              className="flex-1 hover:shadow-inner-glow glow-border md:min-w-[20rem]"
               key={item.name}
             >
               <Link

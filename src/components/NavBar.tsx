@@ -36,9 +36,16 @@ export default function NavBar() {
                 </div>
                 <div className="hidden md:ml-6 md:block">
                   <div className="flex space-x-4 pt-0.5">
-                    {NavLinkItems.map((item, idx) => (
-                      <NavButton key={idx} name={item.name} href={item.href} />
-                    ))}
+                    {NavLinkItems.map(
+                      (item, idx) =>
+                        item.navbar && (
+                          <NavButton
+                            key={idx}
+                            name={item.name}
+                            href={item.href}
+                          />
+                        )
+                    )}
                   </div>
                 </div>
               </div>
@@ -47,9 +54,16 @@ export default function NavBar() {
 
           <Disclosure.Panel className="md:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
-              {NavLinkItems.map((item, idx) => (
-                <NavAsideButton key={idx} name={item.name} href={item.href} />
-              ))}
+              {NavLinkItems.map(
+                (item, idx) =>
+                  item.navbar && (
+                    <NavAsideButton
+                      key={idx}
+                      name={item.name}
+                      href={item.href}
+                    />
+                  )
+              )}
             </div>
           </Disclosure.Panel>
         </>
