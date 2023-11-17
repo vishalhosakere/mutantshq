@@ -31,10 +31,14 @@ async function getContractData() {
   }
 
   const previousTimeStampHour = await getPreviousTimestampHour(block);
+  console.log(block, pool, previousTimeStampHour);
   const { rewardsSinceLastCalculated, _ } = await contract.rewardsBy(
     2,
     ethers.BigNumber.from(pool.lastRewardedTimestampHour),
-    ethers.BigNumber.from(previousTimeStampHour)
+    // TODO: Should be previousTimeStampHour but it's value is coming
+    // to be less than pool.lastRewardedTimestampHour so the call reverts.
+    // For now calculate till current timestamp
+    ethers.BigNumber.from(block.timestamp)
   );
 
   let accumulatedRewardsPerShare = ethers.BigNumber.from(

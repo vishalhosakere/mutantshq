@@ -96,7 +96,8 @@ export default function MaycHub({
     }
 
     if (pricesData.length === 0) {
-      getLooksrareData();
+      // TODO: Looksrare has revoked v1 api so can't fetch prices
+      // getLooksrareData();
       getOwnerData();
     }
   }, []);

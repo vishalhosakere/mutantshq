@@ -22,7 +22,7 @@ export default function Projects() {
               >
                 <div className="relative w-full h-60 rounded-lg">
                   <Image
-                    src="https://pbs.twimg.com/profile_banners/1063742461888086016/1676361659/1500x500"
+                    src="https://pbs.twimg.com/media/FqdeyhOWwAcgOq0?format=jpg&name=large"
                     fill
                     alt=""
                     className="object-cover rounded-lg"
